@@ -26,17 +26,14 @@ if ($conn->connect_error){
 }
 
 
-$sql = "SELECT id,  firstname, lastname, email FROM mysqltable WHERE lastname='Deep' ";
-$result = $conn->query($sql);
+$sql = "DELETE FROM mysqltable WHERE id=1 ";
 
-if ($result->num_rows > 0){
-    echo "<table><tr><th>ID</th><th>Name</th></tr>";
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "<tr><td>".$row["id"]."</td><td>".$row["firstname"]." ".$row["lastname"]." ".$row["email"]."</td></tr>";
-    }
+
+
+if ($conn->query($sql) === TRUE) {
+    echo "Record deleted successfully";
 } else {
-    echo "0 results";
+    echo "Error deleting record: " . $conn->error;
 }
 
 $conn->close();
