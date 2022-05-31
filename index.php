@@ -26,7 +26,7 @@ if ($conn->connect_error){
 }
 
 
-$sql = "SELECT id,  firstname, lastname, email FROM mysqltable";
+$sql = "SELECT id,  firstname, lastname, email FROM mysqltable WHERE lastname='Deep' ";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0){
