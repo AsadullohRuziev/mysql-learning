@@ -14,10 +14,11 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
+$dbname = "mydb";
 
 
 //create connection
-$conn = new mysqli($servername, $username, $password);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error){
@@ -26,15 +27,38 @@ if ($conn->connect_error){
 echo "Connected successfully";
 
 
-//CREATE DATABASE
-$sql = "CREATE DATABASE myDB";
 
 
-if ($conn->query($sql) === TRUE){
-    echo "Database created successfully";
+// sql to create table
+
+$sql = "CREATE TABLE mysqltable(
+       id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+       firstname VARCHAR(30) NOT NULL,
+       lastname VARCHAR(30) NOT NULL,
+       email VARCHAR(50) NOT NULL,
+       reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+ )";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Table MyGuests created successfully";
 } else {
-    echo "Error creating database: " . $conn->error;
+    echo "Error creating table: " . $conn->error;
 }
+
+$conn->close();
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  ?>
 
