@@ -24,23 +24,31 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error){
     die("Connection failed : ".$conn->connect_error);
 }
-echo "Connected successfully";
 
 
+$stmt = $conn->prepare("INSERT INTO mysqltable (firstname, lastname, email) VALUES (?, ?, ?)");
+$stmt-> bind_param("sss",  $firstname, $lastname, $email);
 
 
-// sql to create table
+// set parameters and execute
+$firstname = "Malik";
+$lastname = "Doe";
+$email = "john@example.com";
+$stmt->execute();
 
-$sql = "INSERT INTO mysqltable(firstname, lastname, email) VALUES('Jek', 'Deep', 'jek@deep.com');";
-$sql .= "INSERT INTO mysqltable(firstname, lastname, email) VALUES ('Mary', 'Moe', 'mary@example.com');";
-$sql .= "INSERT INTO mysqltable(firstname, lastname, email) VALUES ('Julie', 'Dooley', 'julie@example.com');";
+$firstname = "Ali";
+$lastname = "Moe";
+$email = "mary@example.com";
+$stmt->execute();
 
-if ($conn->multi_query($sql) === TRUE) {
-    echo "New record created successfully multi_query";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
+$firstname = "Saida";
+$lastname = "Dooley";
+$email = "julie@example.com";
+$stmt->execute();
 
+echo "New records created successfully";
+
+$stmt->close();
 $conn->close();
 
 
