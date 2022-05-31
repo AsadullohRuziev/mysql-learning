@@ -26,34 +26,20 @@ if ($conn->connect_error){
 }
 
 
-$stmt = $conn->prepare("INSERT INTO mysqltable (firstname, lastname, email) VALUES (?, ?, ?)");
-$stmt-> bind_param("sss",  $firstname, $lastname, $email);
+$sql = "SELECT id  firstname, lastname FROM mysqltable";
+$result = $conn->query($sql);
 
+if ($result->num_rows > 0){
+    echo "<table><tr><th>ID</th><th>Name</th></tr>";
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "<tr><td>".$row["id"]."</td><td>".$row["firstname"]." ".$row["lastname"]."</td></tr>";
+    }
+} else {
+    echo "0 results";
+}
 
-// set parameters and execute
-$firstname = "Malik";
-$lastname = "Doe";
-$email = "john@example.com";
-$stmt->execute();
-
-$firstname = "Ali";
-$lastname = "Moe";
-$email = "mary@example.com";
-$stmt->execute();
-
-$firstname = "Saida";
-$lastname = "Dooley";
-$email = "julie@example.com";
-$stmt->execute();
-
-echo "New records created successfully";
-
-$stmt->close();
 $conn->close();
-
-
-
-
 
 
 
