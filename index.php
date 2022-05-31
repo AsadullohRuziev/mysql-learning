@@ -31,10 +31,12 @@ echo "Connected successfully";
 
 // sql to create table
 
-$sql = "INSERT INTO mysqltable(firstname, lastname, email) VALUES('Jek', 'Deep', 'jek@deep.com')";
+$sql = "INSERT INTO mysqltable(firstname, lastname, email) VALUES('Jek', 'Deep', 'jek@deep.com');";
+$sql .= "INSERT INTO mysqltable(firstname, lastname, email) VALUES ('Mary', 'Moe', 'mary@example.com');";
+$sql .= "INSERT INTO mysqltable(firstname, lastname, email) VALUES ('Julie', 'Dooley', 'julie@example.com');";
 
-if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
+if ($conn->multi_query($sql) === TRUE) {
+    echo "New record created successfully multi_query";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
