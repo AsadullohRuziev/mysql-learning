@@ -26,7 +26,7 @@ if ($conn->connect_error){
 }
 
 
-$sql = "DELETE FROM mysqltable WHERE id=1 ";
+$sql = "UPDATE mysqltable SET firstname='Laylo' WHERE id=5 ";
 
 
 
